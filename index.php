@@ -1,55 +1,46 @@
 <?php
-    include "koneksi.php";
-    session_start();
+    include "fungsi/koneksi.php";
 
-    //Untuk proses READ
     $query = "SELECT * FROM tb_kos";
     $sql = mysqli_query ($conn, $query);
 
-    $no = 0;
 
 ?>
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Index</title>
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="csss/style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
-    <!-- fontawesome -->
-    <link rel="stylesheet" href="fontawesome/css/font-awesome.min.css">
-
-    <!-- datatables -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="../fontawesome/css/font-awesome.min.css">
 
-    <script defer src="https://code.jquery.com/jquery-3.7.0.js" ></script>
-    <script defer src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js" ></script>
-    <script defer src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js" ></script>
+    </head>
 
-    <script defer src="script.js" ></script>
-
-</head>
-
-<body>
-    <!-- Navbar start -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">YOGYAKARTA KOS</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarScroll">
-          </div>
-        </div>
-      </nav>
-    <!-- Navbar end -->
+    <body>
+      <!-- Navbar start -->
+      <nav class="navbar navbar-expand-lg fixed-top" style="background-color: rgb(194, 197, 199)" >
+    <div class="container-fluid">
+      <a class="navbar-brand text-dark" href="#"><strong><i class="bi bi-house-gear"></i> YOGYAKARTA KOS</strong></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ms-auto ">
+            <li><a class="nav-link active text-dark" aria-current="page" href="login.php"><i class="bi bi-person-lock"></i> Login</a></li>
+            <li><a class="nav-link active text-dark" aria-current="page" href="registrasi/regisuser.php"><i class="bi bi-person"></i> Registrasi</a></li>
+    </div>
+  </nav>
+      <!-- Navbar end -->
 
     <!-- Carousel start-->
     <div id="carouselExampleCaptions" class="carousel slide" data-interval="2" data-bs-ride="carousel">
@@ -67,7 +58,7 @@
       </div>
     </div>
     <div class="carousel-item">
-      <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="d-block w-100" alt="..." height="670px">
+      <img src="https://images.unsplash.com/photo-1515542706656-8e6ef17a1521?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="d-block w-100" alt="..." height="670px">
       <div class="carousel-caption d-none d-md-block">
         <h5>Pentingnya Pengalaman</h5>
         <p>"Dapatkan pengalaman tinggal yang tak terlupakan di kos-kosan kami. Fasilitas lengkap dan perawatan berkualitas membuat Anda merasa seperti di rumah."</p>
@@ -92,74 +83,82 @@
 </div>
     <!-- Carousel end -->
 
-    <!-- Heading start -->
-    <div class="head">
-        <h1 class="mt-4">KOS YOGYAKARTA</h1>
-      <figure>
-        <blockquote class="blockquote">
-          <p>Berisi data listingan kos yang sudah di verifikasi.</p>
-        </blockquote>
-        <figcaption class="blockquote-footer">
-          ANM <cite title="Source Title">Aman Nyaman Murah</cite>
-        </figcaption>
-      </figure>
-      <a href="kelola.php" type="button" class="btn btn-primary" mb-3>
-        <i class="fa fa-plus"></i>
-        Tambah Data
-    </a>
-    <!-- Alert start -->
-    <?php if(isset($_SESSION['eksekusi'])): ?>
-      <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
-          <?=$_SESSION['eksekusi']; ?>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-     </div>
-     <?php
-     session_destroy();
-     endif;
-     ?>
-     <!-- Alert start -->
-     
-    <!-- Heading end -->
+    <main role="main">
 
-    <!-- Table start -->
-    <div class="table-responsive mt-4">
-        <table id="dt" class="table align-middle table-hover" >
-            <thead>
-                    <tr>
-                       <th><center>No.</center></th>
-                       <th><center>NAMA PEMILIK</center></th>
-                       <th><center>NO.TELPON</center></th>
-                       <th><center>HARGA/BULAN</center></th>
-                       <th><center>MIN. BAYAR</center></th>
-                       <th><center>ALAMAT</center></th>
-                       <th><center>FOTO</center></th>
-                       <th><center>AKSI</center></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php while ($result = mysqli_fetch_assoc($sql)){ ?>
-                    <tr>
-                        <td><?= ++$no; ?>.</td>
-                        <td><?= $result['nama_pemilik']; ?></td>
-                        <td><?= $result['no_telpon']; ?></td>
-                        <td><?= $result['harga_kos']; ?></td>
-                        <td><?= $result['min_bayar']; ?></td>
-                        <td><?= $result['alamat']; ?></td>
-                        <td><img src="gambar/<?= $result['foto']; ?>" alt="" width="200px" height="100px" ></td>
-                        <td>
-                          <a href="kelola.php?ubah=<?= $result['id']; ?>" type="button" class="btn btn-success">
-                         <i class="fa fa-pencil"></i>
-                          </a>
-                          <a href="proses.php?hapus=<?= $result['id']; ?>" type="button" class="btn btn-danger" onClick="return confirm('Apakah anda yakin ingin menghapus data tersebut?')">
-                          <i class="fa fa-trash"></i>
-                          </a>
-                          </td>
-                    </tr>
+        <section class="jumbotron text-center">
+            <div class="container mt-2 fw-bold" id="explore" >
+                <h1>YOGYAKARTA KOS</h1>
+                <p class="lead text-muted">Kami memudahkan anda terutama pendatang yang datang ke Yogyakarta ini dalam menemukan tempat tinggal.</p>
+            </div>
+        </section>
+        
+        <div class="album py-5 bg-light">
+            <div class="container">
+                <div class="row">
+                <?php while ($result = mysqli_fetch_assoc($sql)){ ?>
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                            <img src="gambar/<?= $result['foto']; ?>" class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title><?= $result['nama_pemilik']; ?></title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em"></text></img>
+                            <div class="card-body">
+                                <p class="card-text"><?= $result['deskripsi']; ?>.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted"><?= $result['harga_kos']; ?></small>
+                                </div>
+                                <a href="login.php" type="submit" name="aksi" value="kepoin" class="btn btn-outline-primary mt-2">
+                                        <i class="bi bi-eye"></i>
+                                        Kepoin
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
                     <?php } ?>
-                </tbody>
-            </table>
-        </div>
-        </div>
-    <!-- Table end -->
+                </div>
+                </main>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#f8f9fa" fill-opacity="1" d="M0,224L48,224C96,224,192,224,288,218.7C384,213,480,203,576,176C672,149,768,107,864,122.7C960,139,1056,213,1152,245.3C1248,277,1344,267,1392,261.3L1440,256L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg>
+
+        <!-- about start -->
+        <section id="about">
+                <div class="container">
+                <div class="row text-center mt-3">
+                    <div class="col">
+                        <br><br><br><br>
+                    <h2>Tentang kami</h2>
+                    </div>
+                </div>
+                <p class="text-center mb-10" >Kami menyediakan berbagai pilihan kos yang tentunya akan sangat membantu anda sekalian dalam mencari tempat tinggal. Berawal dari pengalaman saya sendiri yang mana pada waktu itu sedang membutuhkan kos untuk dijadikan tempat tinggal dan pada akhirnya saya menemukan kos yang begitu nyaman dan saya dapatkan tidak melalui media sosial. Oleh karena itu, saya menyediakan ini semua untuk memudahkan anda sekalian dalam mencari tempat tinggal.</p>
+                </div>
+                <br><br><br><br><br>
+                <div class="row text-center" style="margin: auto">
+                    <div class="col">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#f8f9fa" fill-opacity="1" d="M0,64L48,90.7C96,117,192,171,288,176C384,181,480,139,576,138.7C672,139,768,181,864,192C960,203,1056,181,1152,149.3C1248,117,1344,75,1392,53.3L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+                    </section>
+                    <div class="album py-5 bg-light" id="contact">
+                    <h2 class="mt-8 text-center" >Kontak / Bantuan</h2>
+                <div class="row justify-content-center" style="margin: auto" >
+                    <div class="col-md-6">
+                    <form action="proseskontak.php" method="post">
+                        <div class="mb-3">
+                        <label for="name" class="form-label text-start">Nama Lengkap</label>
+                        <input name="nama" type="text" class="form-control " id="name" aria-describedby="name" placeholder="Alexander">
+                        </div>
+                        <label for="email" class="form-label">Email</label>
+                        <input name="email" type="email" class="form-control" id="email" aria-describedby="email" placeholder="email@gmail.com">
+                        <div class="mb-3">
+                        <label for="pesan" class="form-label">Pesan</label>
+                        <textarea name="pesan" class="form-control" id="pesan" rows="3"></textarea>
+                        </div>
+                        <button type="submit" name="send" class="btn btn-primary mb-3">Kirim</button>
+                    </form>
+                    </div>
+                    </div>
+                </div>
+           
+        <!-- about end -->   
+                                     
+
+    <footer class="text-center shadow p-3" id="footer" style="background-color: rgb(194, 197, 199)">
+        <p class="p-3 mb-2">Created With <i class="bi bi-suit-heart-fill"></i> By <a style="color=red"  href="https://www.instagram.com/p/CxrV4SApBNk/?igshid=MzRlODBiNWFlZA==" class=" fw-bold">Wildan Mursalin Rizqia</a></p>
+      </footer>
 </body>
+
 </html>

@@ -1,0 +1,10 @@
+article img {
+    float: left;
+    margin-right: 20px;
+}
+body{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+article h5{
+    font-style: italic;
+}
